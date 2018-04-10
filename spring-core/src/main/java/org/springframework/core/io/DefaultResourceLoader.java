@@ -141,7 +141,7 @@ public class DefaultResourceLoader implements ResourceLoader {
 
 
 	@Override
-	public Resource getResource(String location) {
+	public Resource getResource(String location) {//TODO:hello_chenchen:转换数据成Resource
 		Assert.notNull(location, "Location must not be null");
 
 		for (ProtocolResolver protocolResolver : this.protocolResolvers) {
@@ -161,7 +161,7 @@ public class DefaultResourceLoader implements ResourceLoader {
 			try {
 				// Try to parse the location as a URL...
 				URL url = new URL(location);
-				return (ResourceUtils.isFileURL(url) ? new FileUrlResource(url) : new UrlResource(url));
+				return (ResourceUtils.isFileURL(url) ? new FileUrlResource(url) : new UrlResource(url));//TODO:hello_chenchen:应该是这里实现的
 			}
 			catch (MalformedURLException ex) {
 				// No URL -> resolve as resource path.

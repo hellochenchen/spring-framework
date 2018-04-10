@@ -121,7 +121,7 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	 * initializing a fresh bean factory for the next phase of the context's lifecycle.
 	 */
 	@Override
-	protected final void refreshBeanFactory() throws BeansException {
+	protected final void refreshBeanFactory() throws BeansException {//TODO:hello_chenchen被AbstractApplicationContext.obtainFreshBeanFactory调用
 		if (hasBeanFactory()) {
 			destroyBeans();
 			closeBeanFactory();
@@ -130,7 +130,7 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 			DefaultListableBeanFactory beanFactory = createBeanFactory();
 			beanFactory.setSerializationId(getId());
 			customizeBeanFactory(beanFactory);
-			loadBeanDefinitions(beanFactory);
+			loadBeanDefinitions(beanFactory);//TODO:hello_chenchen:进入AbstractXmlApplicationContext类
 			synchronized (this.beanFactoryMonitor) {
 				this.beanFactory = beanFactory;
 			}

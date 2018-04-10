@@ -191,7 +191,7 @@ public abstract class AbstractBeanDefinitionReader implements EnvironmentCapable
 
 	@Override
 	public int loadBeanDefinitions(String location) throws BeanDefinitionStoreException {
-		return loadBeanDefinitions(location, null);
+		return loadBeanDefinitions(location, null);//TODO:hello_chenchen:inside
 	}
 
 	/**
@@ -238,8 +238,8 @@ public abstract class AbstractBeanDefinitionReader implements EnvironmentCapable
 		}
 		else {
 			// Can only load single resources by absolute URL.
-			Resource resource = resourceLoader.getResource(location);
-			int loadCount = loadBeanDefinitions(resource);
+			Resource resource = resourceLoader.getResource(location);//TODO:hello_chenchen:?这个地方如何回去到的Resource?
+			int loadCount = loadBeanDefinitions(resource);//TODO:hello_chenchen:进入到XmlBeanDefinitionReader类中的方法
 			if (actualResources != null) {
 				actualResources.add(resource);
 			}
@@ -255,7 +255,7 @@ public abstract class AbstractBeanDefinitionReader implements EnvironmentCapable
 		Assert.notNull(locations, "Location array must not be null");
 		int counter = 0;
 		for (String location : locations) {
-			counter += loadBeanDefinitions(location);
+			counter += loadBeanDefinitions(location);//TODO:hello_chenchen:inside
 		}
 		return counter;
 	}

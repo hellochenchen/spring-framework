@@ -139,9 +139,9 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
 			throws BeansException {
 
 		super(parent);
-		setConfigLocations(configLocations);
+		setConfigLocations(configLocations);//TODO:hello_chenchen将需要解析的xml文件路径放在configLocations变量中
 		if (refresh) {
-			refresh();
+			refresh();//TODO:hello_chenchen解析xml
 		}
 	}
 

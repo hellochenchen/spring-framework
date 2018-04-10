@@ -61,7 +61,7 @@ public class BeanDefinitionReaderUtils {
 		bd.setParentName(parentName);
 		if (className != null) {
 			if (classLoader != null) {
-				bd.setBeanClass(ClassUtils.forName(className, classLoader));
+				bd.setBeanClass(ClassUtils.forName(className, classLoader));//TODO:hello_chenchen-Level1:实例化类!!!这里很重要
 			}
 			else {
 				bd.setBeanClassName(className);

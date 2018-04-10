@@ -245,6 +245,7 @@ public abstract class ClassUtils {
 			return clazz;
 		}
 
+		//TODO:hello_chenchen-Level1:实例化类!!!这里很重要
 		// "java.lang.String[]" style arrays
 		if (name.endsWith(ARRAY_SUFFIX)) {
 			String elementClassName = name.substring(0, name.length() - ARRAY_SUFFIX.length());

@@ -402,7 +402,7 @@ public class BeanDefinitionParserDelegate {
 	 */
 	@Nullable
 	public BeanDefinitionHolder parseBeanDefinitionElement(Element ele) {
-		return parseBeanDefinitionElement(ele, null);
+		return parseBeanDefinitionElement(ele, null);//TODO:hello_chenchen:解析bean标签
 	}
 
 	/**
@@ -431,10 +431,10 @@ public class BeanDefinitionParserDelegate {
 		}
 
 		if (containingBean == null) {
-			checkNameUniqueness(beanName, aliases, ele);
+			checkNameUniqueness(beanName, aliases, ele);//TODO:hello_chenchen:this.usedNames检查唯一性
 		}
 
-		AbstractBeanDefinition beanDefinition = parseBeanDefinitionElement(ele, beanName, containingBean);
+		AbstractBeanDefinition beanDefinition = parseBeanDefinitionElement(ele, beanName, containingBean);//TODO:hello_chenchen-Leavel0:解析Bean标签
 		if (beanDefinition != null) {
 			if (!StringUtils.hasText(beanName)) {
 				try {
@@ -497,7 +497,7 @@ public class BeanDefinitionParserDelegate {
 	 * {@code null} if problems occurred during the parsing of the bean definition.
 	 */
 	@Nullable
-	public AbstractBeanDefinition parseBeanDefinitionElement(
+	public AbstractBeanDefinition parseBeanDefinitionElement(//TODO:hello_chenchen-Level1:Bean解析，很重要!!!
 			Element ele, String beanName, @Nullable BeanDefinition containingBean) {
 
 		this.parseState.push(new BeanEntry(beanName));
@@ -512,18 +512,18 @@ public class BeanDefinitionParserDelegate {
 		}
 
 		try {
-			AbstractBeanDefinition bd = createBeanDefinition(className, parent);
+			AbstractBeanDefinition bd = createBeanDefinition(className, parent);//TODO:hello_chenchen:bean标签相关
 
-			parseBeanDefinitionAttributes(ele, beanName, containingBean, bd);
+			parseBeanDefinitionAttributes(ele, beanName, containingBean, bd);//TODO:hello_chenchen:bean标签相关
 			bd.setDescription(DomUtils.getChildElementValueByTagName(ele, DESCRIPTION_ELEMENT));
 
 			parseMetaElements(ele, bd);
 			parseLookupOverrideSubElements(ele, bd.getMethodOverrides());
 			parseReplacedMethodSubElements(ele, bd.getMethodOverrides());
 
-			parseConstructorArgElements(ele, bd);
-			parsePropertyElements(ele, bd);
-			parseQualifierElements(ele, bd);
+			parseConstructorArgElements(ele, bd);//TODO:hello_chenchen:解析constructor-arg标签
+			parsePropertyElements(ele, bd);//TODO:hello_chenchen:解析Property标签
+			parseQualifierElements(ele, bd);//TODO:hello_chenchen:解析Qualifier标签
 
 			bd.setResource(this.readerContext.getResource());
 			bd.setSource(extractSource(ele));
@@ -577,7 +577,7 @@ public class BeanDefinitionParserDelegate {
 		}
 		bd.setLazyInit(TRUE_VALUE.equals(lazyInit));
 
-		String autowire = ele.getAttribute(AUTOWIRE_ATTRIBUTE);
+		String autowire = ele.getAttribute(AUTOWIRE_ATTRIBUTE);//TODO:hello_chenchen:auto-wire
 		bd.setAutowireMode(getAutowireMode(autowire));
 
 		if (ele.hasAttribute(DEPENDS_ON_ATTRIBUTE)) {
@@ -601,7 +601,7 @@ public class BeanDefinitionParserDelegate {
 			bd.setPrimary(TRUE_VALUE.equals(ele.getAttribute(PRIMARY_ATTRIBUTE)));
 		}
 
-		if (ele.hasAttribute(INIT_METHOD_ATTRIBUTE)) {
+		if (ele.hasAttribute(INIT_METHOD_ATTRIBUTE)) {//TODO:hello_chenchen:init-method
 			String initMethodName = ele.getAttribute(INIT_METHOD_ATTRIBUTE);
 			bd.setInitMethodName(initMethodName);
 		}
@@ -639,7 +639,7 @@ public class BeanDefinitionParserDelegate {
 	protected AbstractBeanDefinition createBeanDefinition(@Nullable String className, @Nullable String parentName)
 			throws ClassNotFoundException {
 
-		return BeanDefinitionReaderUtils.createBeanDefinition(
+		return BeanDefinitionReaderUtils.createBeanDefinition(//TODO:hello_chenchen:inside
 				parentName, className, this.readerContext.getBeanClassLoader());
 	}
 
@@ -688,7 +688,7 @@ public class BeanDefinitionParserDelegate {
 		NodeList nl = beanEle.getChildNodes();
 		for (int i = 0; i < nl.getLength(); i++) {
 			Node node = nl.item(i);
-			if (isCandidateElement(node) && nodeNameEquals(node, CONSTRUCTOR_ARG_ELEMENT)) {
+			if (isCandidateElement(node) && nodeNameEquals(node, CONSTRUCTOR_ARG_ELEMENT)) {//TODO:hello_chenchen:解析constructor-arg标签
 				parseConstructorArgElement((Element) node, bd);
 			}
 		}

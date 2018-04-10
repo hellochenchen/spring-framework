@@ -299,8 +299,8 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 * @throws BeanDefinitionStoreException in case of loading or parsing errors
 	 */
 	@Override
-	public int loadBeanDefinitions(Resource resource) throws BeanDefinitionStoreException {
-		return loadBeanDefinitions(new EncodedResource(resource));
+	public int loadBeanDefinitions(Resource resource) throws BeanDefinitionStoreException {//TODO:hello_chenchen:被AbstractBeanDefinitionReader类调用
+		return loadBeanDefinitions(new EncodedResource(resource));//TODO:hello_chenchen:inside
 	}
 
 	/**
@@ -310,7 +310,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 * @return the number of bean definitions found
 	 * @throws BeanDefinitionStoreException in case of loading or parsing errors
 	 */
-	public int loadBeanDefinitions(EncodedResource encodedResource) throws BeanDefinitionStoreException {
+	public int loadBeanDefinitions(EncodedResource encodedResource) throws BeanDefinitionStoreException {//TODO:hello_chenchen:解析被转换的xml
 		Assert.notNull(encodedResource, "EncodedResource must not be null");
 		if (logger.isInfoEnabled()) {
 			logger.info("Loading XML bean definitions from " + encodedResource.getResource());
@@ -332,7 +332,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 				if (encodedResource.getEncoding() != null) {
 					inputSource.setEncoding(encodedResource.getEncoding());
 				}
-				return doLoadBeanDefinitions(inputSource, encodedResource.getResource());
+				return doLoadBeanDefinitions(inputSource, encodedResource.getResource());//TODO:hello_chenchen
 			}
 			finally {
 				inputStream.close();
@@ -388,7 +388,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 			throws BeanDefinitionStoreException {
 		try {
 			Document doc = doLoadDocument(inputSource, resource);
-			return registerBeanDefinitions(doc, resource);
+			return registerBeanDefinitions(doc, resource);//TODO:hello_chenchen:inside解析xml Bean标签
 		}
 		catch (BeanDefinitionStoreException ex) {
 			throw ex;
@@ -504,7 +504,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	public int registerBeanDefinitions(Document doc, Resource resource) throws BeanDefinitionStoreException {
 		BeanDefinitionDocumentReader documentReader = createBeanDefinitionDocumentReader();
 		int countBefore = getRegistry().getBeanDefinitionCount();
-		documentReader.registerBeanDefinitions(doc, createReaderContext(resource));
+		documentReader.registerBeanDefinitions(doc, createReaderContext(resource));//TODO:hello_chenchen:inside
 		return getRegistry().getBeanDefinitionCount() - countBefore;
 	}
 
