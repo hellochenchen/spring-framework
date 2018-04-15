@@ -40,7 +40,7 @@ task cglibRepackJar(type: Jar) { repackJar ->
 				}
 				// Repackage net.sf.cglib => org.springframework.cglib
 				rule(pattern: "net.sf.cglib.**", result: "org.springframework.cglib.@1")
-				// As mentioned above, transform cglib"s internal asm dependencies from
+				// As mentioned above, transform cglib's internal asm dependencies from
 				// org.objectweb.asm => org.springframework.asm. Doing this counts on the
 				// the fact that Spring and cglib depend on the same version of asm!
 				rule(pattern: "org.objectweb.asm.**", result: "org.springframework.asm.@1")
@@ -86,8 +86,9 @@ dependencies {
 	optional("io.reactivex.rxjava2:rxjava:${rxjava2Version}")
 	optional("io.netty:netty-buffer")
 	testCompile("io.projectreactor:reactor-test")
-	testCompile("javax.xml.bind:jaxb-api:2.3.0")
 	testCompile("org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}")
+	testCompile("org.xmlunit:xmlunit-matchers:2.5.1")
+	testCompile("javax.xml.bind:jaxb-api:2.3.0")
 	testCompile("com.fasterxml.woodstox:woodstox-core:5.0.3") {
 		exclude group: "stax", module: "stax-api"
 	}
@@ -98,6 +99,12 @@ jar {
 	dependsOn cglibRepackJar
 	from(zipTree(cglibRepackJar.archivePath)) {
 		include "org/springframework/cglib/**"
+		exclude "org/springframework/cglib/core/AbstractClassGenerator*.class"
+		exclude "org/springframework/cglib/core/KeyFactory.class"
+		exclude "org/springframework/cglib/core/KeyFactory\$*.class"
+		exclude "org/springframework/cglib/core/ReflectUtils*.class"
+		exclude "org/springframework/cglib/proxy/Enhancer*.class"
+		exclude "org/springframework/cglib/proxy/MethodProxy*.class"
 	}
 
 	dependsOn objenesisRepackJar
